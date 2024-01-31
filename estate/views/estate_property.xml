@@ -1,5 +1,17 @@
 <odoo>
 	<data>
+		<record id="estate_property_view_search" model="ir.ui.view">
+		    <field name="name">Estate Property Search</field>
+		    <field name="model">estate.property</field>
+		    <field name="arch" type="xml">
+				<search string="Tests">
+					<filter name="Postal Code Is Set" domain="[('postcode', '&gt;', 0)]"/>
+
+				    <field name="name"/>
+				    <field name="postcode"/>
+				</search>
+		    </field>
+		</record>
 		<record id="estate_property_view_tree" model="ir.ui.view">
 		    <field name="name">Estate Property List</field>
 		    <field name="model">estate.property</field>
@@ -20,7 +32,7 @@
 				        <group>
 				            <group>
 				                <field name="name"/>
-				                <field name="postcode"/>
+				                <field name="postcode" required="True"/>
 				                <field name="date_availability"/>
 				                <field name="expected_price"/>
 				                <field name="facades"/>
