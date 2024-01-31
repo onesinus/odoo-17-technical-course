@@ -49,7 +49,14 @@
 				            <notebook>
 				                <page string="Description">
 				                    <field name="description"/>
-				                    <field name="garden_orientation"/>
+				                    <label for="garden_orientation" string="Garden Orientation"/>
+				                    <field name="garden_orientation" />
+				                </page>
+				                <page string="PIC and Customer">
+				                	<group>
+					                    <field name="user_id" />
+					                    <field name="buyer_id" />
+					                </group>
 				                </page>
 				            </notebook>
 				        </group>
