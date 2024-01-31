@@ -21,3 +21,6 @@ class EstateProperty(models.Model):
 	    string="Garden Orientation",
 	)
 	last_seen = fields.Datetime("Last Seen", default=fields.Datetime.now)
+
+	user_id = fields.Many2one("res.users", string="Salesman", default=lambda self: self.env.user)
+	buyer_id = fields.Many2one("res.partner", string="Buyer", readonly=True, copy=False)
