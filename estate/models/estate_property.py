@@ -1,8 +1,23 @@
-from odoo import models, fields
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 class EstateProperty(models.Model):
 	_name = "estate.property"
 	_description = "Estate Property"
+
+	_sql_constraints = [
+	    (
+	        'unique_name', 
+	        'UNIQUE(name)', 
+	        'The name must be unique'
+	    )
+	]
+
+	@api.constrains('selling_price')
+	def _check_selling_price(self):
+	    for record in self:
+	        if record.selling_price < 1:
+	            raise ValidationError("The selling price must be greater than 0")
 
 	name = fields.Char(required=True)
 	description = fields.Text(default="Estate Property Description")
