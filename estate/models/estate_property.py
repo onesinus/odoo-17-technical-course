@@ -90,3 +90,7 @@ class EstateProperty(models.Model):
 	    if not set(self.mapped("state")) <= {"new", "canceled"}:
 	        raise UserError("Only new and canceled state can be deleted.")
 	    return super().unlink()
+
+	def update_state_schedule(self):
+		if not self.date_availability:
+			self.env["estate.property"].search([]).write({"state": "canceled"})
