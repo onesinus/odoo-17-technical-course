@@ -9,7 +9,15 @@
     """,
     'application': True,
     'data': [
+
+
+        # Security
         'security/ir.model.access.csv',
+
+        # templates
+        'data/templates/example_email_template.xml',
+
+        # views
         'views/menu.xml',
         'views/estate_property.xml',
 
@@ -17,6 +25,6 @@
         'data/estate.property.csv',
 
         # Schedulers
-        'views/schedulers/estate_property_scheduler.xml'
+        'views/schedulers/estate_property_scheduler.xml'        
     ]
 }

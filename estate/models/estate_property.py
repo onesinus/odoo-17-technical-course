@@ -80,6 +80,24 @@ class EstateProperty(models.Model):
 	        raise UserError("Sold properties cannot be canceled.")
 	    return self.write({"state": "canceled"})
 
+	def action_send_email(self):
+		template = self.env.ref("estate.simple_example_email_template")
+
+		email_values = {
+            "email_to": "onesinustamba@gmail.com,onesinus231@gmail.com",
+            "email_cc": False,
+            "auto_delete": True,
+            "recipient_ids": [],
+            "partner_ids": [],
+            "scheduled_date": False,
+            "email_from": "onesinus231@gmail.com",
+        }
+		template.send_mail(
+		    self.id,
+		    email_values=email_values,
+		    force_send=True,
+		)
+
 	@api.model
 	def create(self, vals):
 	    if vals.get("selling_price") and vals.get("date_availability"):
