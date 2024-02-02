@@ -4,6 +4,7 @@ from odoo.exceptions import ValidationError, UserError
 class EstateProperty(models.Model):
 	_name = "estate.property"
 	_description = "Estate Property"
+	_order = "date_availability desc"
 
 	_sql_constraints = [
 	    (
@@ -57,6 +58,7 @@ class EstateProperty(models.Model):
 	state = fields.Selection(
 	    selection=[
 	        ("new", "New"),
+	        ("ready", "Ready"),
 	        ("offer_received", "Offer Received"),
 	        ("offer_accepted", "Offer Accepted"),
 	        ("sold", "Sold"),
@@ -77,3 +79,14 @@ class EstateProperty(models.Model):
 	    if "sold" in self.mapped("state"):
 	        raise UserError("Sold properties cannot be canceled.")
 	    return self.write({"state": "canceled"})
+
+	@api.model
+	def create(self, vals):
+	    if vals.get("selling_price") and vals.get("date_availability"):
+	        vals["state"] = "ready"
+	    return super().create(vals)
+
+	def unlink(self):
+	    if not set(self.mapped("state")) <= {"new", "canceled"}:
+	        raise UserError("Only new and canceled state can be deleted.")
+	    return super().unlink()
