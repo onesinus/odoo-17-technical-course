@@ -28,6 +28,11 @@
 		    <field name="model">estate.property</field>
 		    <field name="arch" type="xml">
 				<form string="Test">
+					<header>
+				        <button name="action_sold" type="object" string="Sold" invisible="state=='canceled' or state=='sold' or state=='offer_accepted'"/>
+				        <button name="action_cancel" type="object" string="Cancel" invisible="state=='canceled' or state=='sold' or state=='offer_accepted'" />
+				        <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
+				    </header>
 				    <sheet>
 				        <group>
 				            <group>
