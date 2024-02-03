@@ -1,15 +1,14 @@
 <odoo>
-    <record id="estate_property_action" model="ir.actions.act_window">
-        <field name="name">Estate Property</field>
-        <field name="res_model">estate.property</field>
-        <field name="view_mode">tree,form,kanban</field>
-    </record>
 
     <menuitem id="estate_menu_root" name="Estate Application" sequence="0">
         <menuitem id="estate_master_data_menu" name="Master Data">
             <menuitem 
                 id="estate_property_menu_action" 
                 action="estate_property_action"
+            /> 
+            <menuitem 
+                id="estate_property_type_menu_action" 
+                action="estate_property_type_action"
             />
         </menuitem>
     </menuitem>
