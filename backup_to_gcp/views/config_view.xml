@@ -1,0 +1,111 @@
+<odoo>
+    <data>
+        <!-- Action -->
+        <record id="action_backup_to_gcp_config" model="ir.actions.act_window">
+          <field name="name">Backup to GCP Configuration</field>
+          <field name="res_model">backup_to_gcp.config</field>
+          <field name="view_mode">tree,form</field>
+          <field name="domain"/>
+          <field name="context"/>
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              Click here to add backup configuration
+            </p>
+          </field>
+        </record>
+
+        <!-- Tree -->
+         <record model="ir.ui.view" id="view_backup_to_gcp_config_tree">
+            <field name="name">backup_to_gcp.config.tree</field>
+            <field name="model">backup_to_gcp.config</field>
+            <field name="arch" type="xml">
+                <tree string="GCP Configuration">
+                    <field name="database_name"/>
+                    <field name="credentials_file"/>
+                    <field name="gcs_bucket_name"/>
+
+                    <field name="is_scheduler_active" widget="boolean_toggle" />
+                    <field name="scheduler_interval" />
+
+                    <field name="is_send_email" widget="boolean_toggle"/>
+                    <field name="notification_type"/>
+                    <field name="email_notification_receiver"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_backup_to_gcp_config_form" model="ir.ui.view">
+            <field name="name">backup_to_gcp.config.form</field>
+            <field name="model">backup_to_gcp.config</field>
+            <field name="arch" type="xml">
+                <form string="Backup to GCP Configuration">
+                    <sheet>
+                        <group colspan="2">
+                            <group string="General Backup Configuration">
+                                <field name="backup_format" class="oe_inline" />
+                                <field name="database_name" class="oe_inline" />
+                                <field name="admin_password" password="True" class="oe_inline" />
+                            </group>
+                            <group string="Google Cloud Storage Configuration">
+                                <field name="credentials_file" class="oe_inline" />
+                                <field name="gcs_bucket_name" class="oe_inline" />
+                            </group>
+                        </group>
+                        <group colspan="2">
+                            <group string="Email Notification Configuration">
+                                <field
+                                        name="is_send_email"
+                                        widget="boolean_toggle"
+                                />
+                                <field
+                                        name="notification_type"
+                                        readonly="is_send_email==False"
+                                        required="is_send_email==True"
+                                />
+                                <field
+                                        name="email_notification_receiver"
+                                        readonly="is_send_email==False"
+                                        required="is_send_email==True"
+                                        placeholder="youremail@domain.com"
+                                />
+                            </group>
+                            <group string="Backup Interval">
+                                <field
+                                        name="is_scheduler_active"
+                                        widget="boolean_toggle"
+                                />
+                                <field
+                                        name="scheduler_interval"
+                                        readonly="is_scheduler_active==False"
+                                        required="is_scheduler_active==True"
+                                        help="The backup will run every (x) hours"
+                                 />
+                            </group>
+                        </group>
+                        <group colspan="2">
+                            <group string="Auto remove older backup data">
+                                <field
+                                        name="is_auto_remove"
+                                        widget="boolean_toggle"
+                                />
+                                <field
+                                        name="keep_data_x_days"
+                                        readonly="is_auto_remove==False"
+                                        required="is_auto_remove==True"
+                                        help="this will remove backup data older than x days defined"
+                                />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Menu Item -->
+        <menuitem id="menu_backup_to_gcp_config" name="Backup" parent="base.menu_administration"
+                  sequence="10"/>
+        <menuitem id="menu_backup_to_gcp_config_form" name="Google Cloud Configuration" parent="menu_backup_to_gcp_config"
+                  action="action_backup_to_gcp_config" sequence="10"/>
+    </data>
+</odoo>
