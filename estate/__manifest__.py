@@ -21,6 +21,7 @@
         'views/estate_property.xml',
         'views/estate_property_type.xml',
         'views/estate_property_offer.xml',
+        'views/estate_property_tag.xml',
         'views/menu.xml', # the order position matter!
 
         # Load initial Data
