@@ -1,5 +1,4 @@
 <odoo>
-
     <menuitem id="estate_menu_root" name="Estate Application" sequence="0">
         <menuitem id="estate_master_data_menu" name="Master Data">
             <menuitem 
@@ -9,6 +8,10 @@
             <menuitem 
                 id="estate_property_type_menu_action" 
                 action="estate_property_type_action"
+            />
+            <menuitem 
+                id="estate_property_offer_menu_action" 
+                action="estate_property_offer_action"
             />
         </menuitem>
     </menuitem>
