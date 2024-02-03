@@ -1,19 +1,16 @@
-# -*- coding: utf-8 -*-
+from odoo import models, fields
 
-# from odoo import models, fields, api
+class EstatePropertyTagInherit(models.Model):
+    _inherit = "estate.property.tag"
 
+    priority = fields.Integer(string="Tag Priority", default=0)
+    color = fields.Integer(string="Color Index Overide field", required=True)
 
-# class learn_customization(models.Model):
-#     _name = 'learn_customization.learn_customization'
-#     _description = 'learn_customization.learn_customization'
+    # def create(self):
+    # 	# put your codes here
+    #     return super().create()
 
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         for record in self:
-#             record.value2 = float(record.value) / 100
+class SalesOrderInherit(models.Model):
+    _inherit = "sale.order"
 
+    client_document_number = fields.Char(string="SO Client Number")
