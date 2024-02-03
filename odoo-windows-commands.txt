@@ -1,0 +1,13 @@
+----
+Install python package
+----
+> cd E:\_Installed Apps\python
+
+> Scripts\pip3 install google-cloud-storage==2.9.0
+
+----
+Odoo scaffold command
+----
+<python path> <odoo bin path> scaffold <module_name> <target_dir>
+
+"E:\_Installed Apps\python\python.exe" "E:\_Installed Apps\server\odoo-bin" scaffold learn_customization "E:\_Installed Apps\server\addons"
