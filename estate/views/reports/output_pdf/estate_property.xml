@@ -1,0 +1,41 @@
+<odoo>
+	<data>
+		<record id="action_report_estate_property_template" model="ir.actions.report">
+	       <field name="name">Estate Property Report</field>
+	       <field name="model">estate.property</field>
+	       <field name="report_type">qweb-pdf</field>
+	       <field name="report_name">estate.report_estate</field>
+	       <field name="report_file">estate.report_estate</field>
+	       <field name="print_report_name">'Estate Property Report - %s' % (object.name)</field>
+	       <field name="binding_model_id" ref="estate.model_estate_property"/>
+	       <field name="binding_type">report</field>
+	    </record>
+
+	    <template id="report_estate">
+	        <t t-call="web.html_container">
+	            <t t-foreach="docs" t-as="doc">
+	                <t t-call="estate.report_estate_property_document" t-lang="doc.buyer_id.lang or 'en_US'"/>
+	            </t>
+	        </t>
+	    </template>
+
+	    <template id="report_estate_property_document">
+	        <t t-call="web.external_layout">
+	            <div class="page">
+	                <h2>Report Estate</h2>
+	                <p>This object's name is <span t-field="doc.name"/></p>
+
+	                <table>
+	                	<tr>
+	                		<td><span t-field="doc.name"/></td>
+	                		<td><span t-field="doc.postcode"/></td>
+	                		<td><span t-field="doc.date_availability"/></td>
+	                		<td><span t-field="doc.expected_price"/></td>
+	                		<td><span t-field="doc.selling_price"/></td>
+	                	</tr>
+	                </table>
+	            </div>
+	        </t>
+	    </template> 
+	</data>
+</odoo>
