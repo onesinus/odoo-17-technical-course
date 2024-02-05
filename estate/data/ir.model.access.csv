@@ -1,0 +1,4 @@
+id,group_id,model_id,name,perm_read,perm_write,perm_create,perm_unlink
+__export__.ir_model_access_746_3f61d568,Estate Property Staff,Estate Property,estate acces,TRUE,TRUE,TRUE,TRUE
+permission_1,Estate Property Role 1,Real Estate Property Type,estate property type access,TRUE,TRUE,TRUE,FALSE
+permission_2,Estate Property Role 1,Real Estate Property Tag,estate property tag access,TRUE,TRUE,TRUE,TRUE
