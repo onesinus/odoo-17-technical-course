@@ -1,0 +1,25 @@
+<odoo>
+	<record id="view_users_with_token_tree" model="ir.ui.view">
+		<field name="name">users.with.token.tree</field>
+		<field name="model">res.users</field>
+		<field name="arch" type="xml">
+			<tree create="false">
+				<field name="name" />
+				<field name="auth_token" />
+				<button 
+					string="Generate Auth Token" 
+					type="object" 
+					class="oe_highlight" 
+					name="generate_auth_token"
+				/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="users_token_action" model="ir.actions.act_window">
+		<field name="name">Users with Auth Token</field>
+		<field name="res_model">res.users</field>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="estate.view_users_with_token_tree"></field>
+	</record>
+</odoo>

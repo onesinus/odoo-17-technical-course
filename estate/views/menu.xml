@@ -18,5 +18,11 @@
                 action="estate_property_tag_action"
             />
         </menuitem>
+        <menuitem id="api_menu" name="API Configurations">
+            <menuitem 
+                id="api_user_token_menu_action" 
+                action="users_token_action"
+            /> 
+        </menuitem>        
     </menuitem>
 </odoo>
