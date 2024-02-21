@@ -36,3 +36,30 @@ class EstatePropertyTagController(http.Controller):
 			return Response(json.dumps(response_data), content_type="application/json")
 		except Exception as e:
 			return Response(json.dumps({'error': 'something went wrong', 'error_detail': str(e)}), status=500)
+
+	@http.route('/estate-property-tag', auth="public", methods=['POST'], csrf=False)
+	@authenticate
+	def create_tag(self, **kwargs):
+		try:
+			request_data = json.loads(request.httprequest.data.decode("utf-8"))
+
+			name = request_data.get('name')
+			color = int(request_data.get('color'))
+
+			if not all([name, color]):
+				return Response("Bad Request: name and color are required", status=400)
+
+			check_tag_exist = request.env['estate.property.tag'].search([('name', '=', name)])
+			if check_tag_exist:
+				return Response(f"Tag with this name ({name}) is already exist!", status=400)
+
+			tag = request.env['estate.property.tag'].create({
+				'name': name,
+				'color': color
+			})
+
+			response = json.dumps({'id': tag.id, 'name': name, 'color': color})
+			return Response(response, content_type="application/json")
+
+		except Exception as e:
+			return Response(f"There is error occured: {str(e)}", status=500)
