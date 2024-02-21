@@ -20,3 +20,19 @@ class EstatePropertyTagController(http.Controller):
 			})
 
 		return Response(json.dumps(property_tags), content_type="application/json")
+
+	@http.route('/estate-property-tag/<int:tag_id>', auth="public", methods=['GET'])
+	@authenticate
+	def get_property_tag_by_id(self, tag_id, **kwargs):
+		try:
+			tag = request.env['estate.property.tag'].browse(tag_id)
+
+			response_data = {
+				'id': tag.id,
+				'name': tag.name,
+				'color': tag.color
+			}
+
+			return Response(json.dumps(response_data), content_type="application/json")
+		except Exception as e:
+			return Response(json.dumps({'error': 'something went wrong', 'error_detail': str(e)}), status=500)
