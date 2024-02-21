@@ -23,6 +23,9 @@
         'views/estate_property_tag.xml',
         'views/menu.xml', # the order position matter!
 
+        # Load demo data
+        'demo/estate.property.tag.xml',
+
         # Load initial Data
         'data/estate.property.csv',
         'data/res.groups.csv',
