@@ -63,3 +63,24 @@ class EstatePropertyTagController(http.Controller):
 
 		except Exception as e:
 			return Response(f"There is error occured: {str(e)}", status=500)
+
+	@http.route('/estate-property-tag/<int:tag_id>', auth="public", methods=['PUT'], csrf=False)
+	@authenticate
+	def update_tag(self, tag_id, **kwargs):
+		try:
+			tag = request.env['estate.property.tag'].browse(tag_id)
+
+			updated_data = json.loads(request.httprequest.data.decode("utf-8"))
+			
+			name = updated_data.get('name')
+			color = int(updated_data.get('color'))
+
+			tag.write({
+				'name': name,
+				'color': color
+			})
+
+			response = json.dumps({'id': tag.id, 'name': name, 'color': color})
+			return Response(response, content_type="application/json")
+		except Exception as e:
+			return Response(f"There is error occured: {str(e)}", status=500)
