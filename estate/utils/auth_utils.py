@@ -8,6 +8,8 @@ def authenticate(func):
 			token = request.httprequest.headers.get('Authorization')
 			user = authenticate_user(token)
 
+			request.env = request.env(user=user)
+
 			kwargs['user'] = user
 
 			return func(*args, **kwargs)
