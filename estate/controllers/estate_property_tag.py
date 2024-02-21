@@ -84,3 +84,15 @@ class EstatePropertyTagController(http.Controller):
 			return Response(response, content_type="application/json")
 		except Exception as e:
 			return Response(f"There is error occured: {str(e)}", status=500)
+
+	@http.route('/estate-property-tag/<int:tag_id>', auth="public", methods=['DELETE'], csrf=False)
+	@authenticate
+	def delete_tag(self, tag_id, **kwargs):
+		tag = request.env['estate.property.tag'].browse(tag_id)
+		tag.unlink()
+
+		response_data = {
+			'id': tag_id,
+			'message': f"Tag with id #{tag_id} has been deleted."
+		}
+		return Response(json.dumps(response_data), content_type="application/json")
