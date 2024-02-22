@@ -36,3 +36,21 @@ class TestEstatePropertyTagAPI(HttpCase):
 		}
 		response = requests.get(url, headers=headers)
 		self.assertEqual(response.status_code, 200)
+
+	def test_get_tag_by_id(self):
+		tag_id = 1
+		url = f'{self.base_url}/estate-property-tag/{tag_id}'
+		headers = {
+			'Authorization': self.auth_token,
+			'Cookie': f'session_id={self.session_id}'
+		}
+
+		response = requests.get(url, headers=headers)
+		self.assertEqual(response.status_code, 200)
+
+		expected_response = {
+		    "id": 1,
+		    "name": "Red",
+		    "color": 1
+		}
+		self.assertEqual(response.json(), expected_response)
