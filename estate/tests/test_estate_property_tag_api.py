@@ -1,4 +1,5 @@
 import json
+import random
 
 import requests
 from odoo.tests import HttpCase
@@ -52,5 +53,44 @@ class TestEstatePropertyTagAPI(HttpCase):
 		    "id": 1,
 		    "name": "Red",
 		    "color": 1
+		}
+		self.assertEqual(response.json(), expected_response)
+
+	def test_create_tag(self):
+		url = f'{self.base_url}/estate-property-tag'
+		headers = {
+			'Authorization': self.auth_token,
+			'Cookie': f'session_id={self.session_id}'
+		}
+
+		random_number = random.random()
+		data = {
+			"name": f"HEHe{random_number}",
+			"color": 99
+		}
+
+		response = requests.post(url, headers=headers, data=json.dumps(data))
+		self.assertEqual(response.status_code, 201)
+
+	def test_update_tag(self):
+		updated_id = 1
+		url = f'{self.base_url}/estate-property-tag/{updated_id}'
+		headers = {
+			'Authorization': self.auth_token,
+			'Cookie': f'session_id={self.session_id}'
+		}
+
+		data = {
+			"name": "Hoho",
+			"color": 11
+		}
+
+		response = requests.put(url, headers=headers, data=json.dumps(data))
+		self.assertEqual(response.status_code, 200)
+
+		expected_response = {
+		    "id": updated_id,
+		    "name": "Hoho",
+		    "color": 11
 		}
 		self.assertEqual(response.json(), expected_response)

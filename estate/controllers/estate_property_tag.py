@@ -59,7 +59,7 @@ class EstatePropertyTagController(http.Controller):
 			})
 
 			response = json.dumps({'id': tag.id, 'name': name, 'color': color})
-			return Response(response, content_type="application/json")
+			return Response(response, content_type="application/json", status=201)
 
 		except Exception as e:
 			return Response(f"There is error occured: {str(e)}", status=500)
