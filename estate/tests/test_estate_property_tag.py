@@ -15,3 +15,13 @@ class TestEstatePropertyTag(TransactionCase):
 		tag = self.estate_property_tag_model.create(tag_data)
 		self.assertEqual(tag.name, 'TAG 001')
 		self.assertEqual(tag.color, 99)
+
+	def test_read_tag(self):
+		new_tag = self.estate_property_tag_model.create({
+			'name': 'TAG 002',
+			'color': 69	
+		})
+
+		tag = new_tag.read(['name', 'color'])
+		self.assertEqual(tag[0]['name'], 'TAG 002')
+		self.assertEqual(tag[0]['color'], 69)
