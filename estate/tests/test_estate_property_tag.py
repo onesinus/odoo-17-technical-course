@@ -1,4 +1,5 @@
 from odoo.tests import TransactionCase
+from odoo.exceptions import ValidationError
 
 
 class TestEstatePropertyTag(TransactionCase):
@@ -32,5 +33,14 @@ class TestEstatePropertyTag(TransactionCase):
 			'color': 70
 		})
 
-		tag.write({'color': 6969})
-		self.assertEqual(tag.color, 6969)
+		tag.write({'color': 69})
+		self.assertEqual(tag.color, 69)
+
+	def test_update_with_invalid_value(self):
+		with self.assertRaises(ValidationError) as context:
+			tag = self.estate_property_tag_model.create({
+				'name': 'TAG 003',
+				'color': 70
+			})
+			tag.write({'color': 150})
+		self.assertEqual(str(context.exception), "Color Index must be less than 100")
