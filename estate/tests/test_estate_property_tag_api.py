@@ -39,7 +39,7 @@ class TestEstatePropertyTagAPI(HttpCase):
 		self.assertEqual(response.status_code, 200)
 
 	def test_get_tag_by_id(self):
-		tag_id = 1
+		tag_id = 65
 		url = f'{self.base_url}/estate-property-tag/{tag_id}'
 		headers = {
 			'Authorization': self.auth_token,
@@ -50,8 +50,8 @@ class TestEstatePropertyTagAPI(HttpCase):
 		self.assertEqual(response.status_code, 200)
 
 		expected_response = {
-		    "id": 1,
-		    "name": "Red",
+		    "id": tag_id,
+		    "name": "test 123",
 		    "color": 1
 		}
 		self.assertEqual(response.json(), expected_response)
@@ -92,5 +92,22 @@ class TestEstatePropertyTagAPI(HttpCase):
 		    "id": updated_id,
 		    "name": "Hoho",
 		    "color": 11
+		}
+		self.assertEqual(response.json(), expected_response)
+
+	def test_delete_tag(self):
+		delete_id = 3
+		url = f'{self.base_url}/estate-property-tag/{delete_id}'
+		headers = {
+			'Authorization': self.auth_token,
+			'Cookie': f'session_id={self.session_id}'
+		}
+
+		response = requests.delete(url, headers=headers)
+		self.assertEqual(response.status_code, 200)
+
+		expected_response = {
+		    "id": delete_id,
+		    "message": f"Tag with id #{delete_id} has been deleted."
 		}
 		self.assertEqual(response.json(), expected_response)
