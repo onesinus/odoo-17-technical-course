@@ -111,3 +111,9 @@ class TestEstatePropertyTagAPI(HttpCase):
 		    "message": f"Tag with id #{delete_id} has been deleted."
 		}
 		self.assertEqual(response.json(), expected_response)
+
+	def test_unauthorized_request(self):
+		url = f'{self.base_url}/estate-property-tags'
+		response = requests.get(url)
+		self.assertEqual(response.status_code, 401)
+		self.assertIn('Un-authorized', response.text)
