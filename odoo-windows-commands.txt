@@ -11,3 +11,22 @@ Odoo scaffold command
 <python path> <odoo bin path> scaffold <module_name> <target_dir>
 
 "E:\_Installed Apps\python\python.exe" "E:\_Installed Apps\server\odoo-bin" scaffold learn_customization "E:\_Installed Apps\server\addons"
+
+----
+Odoo Upgrade addons command
+----
+"E:\_Installed Apps\python\python.exe" "E:\_Installed Apps\server\odoo-bin" -d admin -u material_registration
+
+----
+Odoo Run tests
+----
+odoo -c <path_to_config_file> -d <your_database_name> --test-enable --test-file=<path_to_test_file>
+
+"E:\_Installed Apps\python\python.exe" "E:\_Installed Apps\server\odoo-bin" -d admin -i material_registration --test-enable
+
+"E:\_Installed Apps\python\python.exe" "E:\_Installed Apps\server\odoo-bin" -d admin --test-file="E:\_Installed Apps\server\addons\material_registration\tests\test_material.py"
+
+"E:\_Installed Apps\python\python.exe" "E:\_Installed Apps\server\odoo-bin" -d admin --test-enable --test-file="E:\_Installed Apps\server\addons\material_registration\tests\test_material.py"
+
+# Tail odoo log file
+download BareTail.exe and open the file
