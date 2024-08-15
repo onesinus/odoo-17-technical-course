@@ -22,5 +22,51 @@
         </field>
     </record>
     
+
+    <!-- Wizard example -->
+       <record id="view_partner_form" model="ir.ui.view">
+       <field name="name">res.partner.view.form.inherit</field>
+       <field name="model">res.partner</field>
+       <field name="inherit_id" ref="base.view_partner_form"/>
+       <field name="arch" type="xml">
+           <xpath expr="//div[@name='button_box']" position="inside">
+               <div class="oe_button_box" name="button_box">
+                   <button 
+                     name="action_send_msg" 
+                     string="Send Question" 
+                     type="object"
+                     class="oe_stat_button" 
+                     icon="fa-add"
+                  />
+               </div>
+           </xpath>
+       </field>
+   </record>
+
+      <record id="_send_question_view_form" model="ir.ui.view">
+       <field name="name">send.question.view.form</field>
+       <field name="model">send.question</field>
+       <field name="priority" eval="8"/>
+       <field name="arch" type="xml">
+           <form string=" question">
+               <group>
+                   <field name="user_id"/>
+                   <field name="mobile"/>
+               </group>
+               <group>
+                   <field name="question"/>
+               </group>
+               <footer>
+                   <button 
+                     name="action_send_question" 
+                     string="Send" 
+                     type="object"
+                    />
+                   <button name="cancel" string="Cancel" special="cancel"/>
+               </footer>
+           </form>
+       </field>
+   </record>
+
   </data>
 </odoo>
